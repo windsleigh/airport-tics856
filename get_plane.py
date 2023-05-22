@@ -40,7 +40,7 @@ def get_plane(passenger, plane_queue, FEL):
     new_plane = Plane(plane_queue[queue_count].id + 1, "arriving", seats)
 
     # tengo que agregar al avion a la fel sin que afecte el clock
-    fel = [passenger(1), avion(1), avion(1.5), passeger(1.2)]
+    fel = [passenger(1), avion(1), avion(1.5), passeger(1.2)]  # ejemplo
     # FEL de aviones?
     # dos clocks?
     passenger.plane = new_plane
