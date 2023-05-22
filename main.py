@@ -1,26 +1,37 @@
+from exit_security import exit_security
 from passenger import Passenger
 from plane import Plane
 from event import Event
-from serve_checkin import serve_checkin
+from serve_security import serve_security
 from time_routine import time_routine
+
 from arrive_checkin import arrive_checkin
+from serve_checkin import serve_checkin
+from exit_checkin import exit_checkin
+
+from arrive_security import arrive_security
 
 # Runtime
-Runtime = 100
+runtime = 100
 
 
 # Plane Capacity
 seats = 100
 
 # Gates
-gates = []
+gates = 5
+board_gates = [] * gates
 last_plane = None
 
-
 # Check In
+counters = 5
+checkin_counters = ["free"] * counters
+totems = 5
+checkin_totems = ["free"] * totems
 
-checkin_counters = ["free", "free", "free", "free"]
-checkin_totems = ["free", "free", "free", "free"]
+# Security
+stations = 5
+security = ["free"] * stations
 
 
 def main():
@@ -32,7 +43,8 @@ def main():
     counter_queue = []
     totem_queue = []
     security_queue = []
-    plane_queue = [False, False, False, False, False]
+    total_planes_queue = 5
+    plane_queue = [False] * total_planes_queue
 
     plane = Plane(1, "arriving", None, seats - 1)
     passenger = Passenger(1, plane, "counter", None, 0)
@@ -44,7 +56,7 @@ def main():
     FEL.append(passengerEvent)
     FEL.append(planeEvent)
 
-    for minuts in range(Runtime):
+    for t in range(runtime):
         clock = 0
         event = time_routine(FEL, clock)
         match event.kind:
@@ -55,13 +67,17 @@ def main():
                 print("ServeCheckIn")
                 serve_checkin(FEL, event)
             case "ExitCheckIn":
-                pass
+                print("ExitCheckIn")
+                exit_checkin(FEL, event, counter_queue, totem_queue)
             case "ArriveSecurity":
-                pass
+                print("ArriveSecurity")
+                arrive_security(FEL, event, security_queue)
             case "ServeSecurity":
-                pass
+                print("ServeSecurity")
+                serve_security(FEL, event)
             case "ExitSecurity":
-                pass
+                print("ExitSecurity")
+                exit_security(FEL, event, security_queue)
             case "ArriveBoarding":
                 pass
             case "ServeBoarding":

@@ -18,10 +18,10 @@ def random_routine(event, kind):
                 return event.clock + 0.04
         case "ServeCheckIn":
             if kind == "totem":
-                # Time the person takes for the person to pass through a totem
+                # Time it takes for the person to pass through a totem
                 return event.clock + 0.05
             if kind == "counter":
-                # Time the person takes for the person to pass through a counter
+                # Time it takes for the person to pass through a counter
                 return event.clock + 0.08
         case "ExitCheckIn":
             if kind == "totem":
@@ -30,12 +30,12 @@ def random_routine(event, kind):
             if kind == "counter":
                 # time it takes for the person to arrive at security from counter
                 return event.clock + 0.02
-        case "ArriveSecurity":
-            pass
         case "ServeSecurity":
-            pass
+            # Time it takes for the person to pass through a security station
+            return event.clock + 0.05
         case "ExitSecurity":
-            pass
+            # time it takes for the person to arrive at barding gate from security
+            return event.clock + 0.05
         case "ArriveBoarding":
             pass
         case "ServeBoarding":
