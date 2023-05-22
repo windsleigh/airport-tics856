@@ -47,10 +47,11 @@ def main():
     plane_queue = [False] * total_planes_queue
 
     plane = Plane(1, "arriving", None, seats - 1)
+
     passenger = Passenger(1, plane, "counter", None, 0)
     last_plane = plane.id
 
-    passengerEvent = Event(0.1, "arrive_check_in", passenger)
+    passengerEvent = Event(1, "arrive_check_in", passenger)
     planeEvent = Event(1, "ArrivePlane", plane)
 
     FEL.append(passengerEvent)
