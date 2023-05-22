@@ -2,7 +2,7 @@ class Plane:
     seats = 100
 
     def __init__(self, id, status, lane, seats):
-        self.id = id
+        self.id = id  # ID PLANE
         self.status = status
         self.lane = lane
         self.seats = seats

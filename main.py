@@ -78,12 +78,15 @@ def main():
             case "ExitSecurity":
                 print("ExitSecurity")
                 exit_security(FEL, event, security_queue)
+
+            #############################
             case "ArriveBoarding":
                 pass
             case "ServeBoarding":
                 pass
             case "ExitBoarding":
                 pass
+
             case "ArrivePlane":
                 pass
             case "BoardPlane":
