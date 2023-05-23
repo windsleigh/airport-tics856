@@ -1,5 +1,5 @@
 # Runtime
-runtime = 100
+runtime = 50
 
 # Plane Capacity
 seats = 100
