@@ -10,7 +10,7 @@ board_gates = [] * gates
 
 # Evil array creation
 gates_queues = [[] for _ in range(gates)]
-gates_counter = [[] for _ in range(gates)]
+# gates_counter = [[] for _ in range(gates)]
 
 total_planes_queue = 5
 plane_queue = [False] * total_planes_queue

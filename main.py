@@ -1,3 +1,6 @@
+from boarding.arrive_boarding import arrive_boarding
+from boarding.exit_boarding import exit_boarding
+from boarding.serve_boarding import serve_boarding
 from checkin.exit_checkin import exit_checkin
 from objects.passenger import Passenger
 from objects.plane import Plane
@@ -34,7 +37,7 @@ def main():
     # FEL.append(planeEvent)
     FEL.append(passengerEvent)
     clock = 0
-    count = 0
+
     for t in range(runtime):
         # evil sorting
         event, clock = time_routine(FEL, clock)
@@ -43,9 +46,7 @@ def main():
         print("entity:", event.entity.id)
         match event.kind:
             case "ArriveCheckIn":
-                print(
-                    "ArriveCheckIn ------------------------------------------------------"
-                )
+                print("ArriveCheckIn ")
                 arrive_checkin(FEL, event, counter_queue, totem_queue)
             case "ServeCheckIn":
                 # print("ServeCheckIn")
@@ -61,13 +62,13 @@ def main():
                 serve_security(FEL, event)
             case "ExitSecurity":
                 # print("ExitSecurity")
-                count = exit_security(FEL, event, security_queue, count)
-            # case "ArriveBoarding":
-            #     pass
-            # case "ServeBoarding":
-            #     pass
-            # case "ExitBoarding":
-            #     pass
+                exit_security(FEL, event, security_queue)
+            case "ArriveBoarding":
+                arrive_boarding(FEL, event)
+            case "ServeBoarding":
+                serve_boarding(FEL, event)
+            case "ExitBoarding":
+                exit_boarding(FEL, event)
             case "ArrivePlane":
                 print("ArrivePlane")
                 arrive_plane(FEL, event, boarding_queue)

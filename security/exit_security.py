@@ -25,20 +25,16 @@ def exit_security(FEL, event, security_queue, count):
         FEL.append(new_serve_event)
 
         # Schedule arrive boarding event
-        # new_boarding_time = random_routine(event, "totem")
-        # new_boarding_event = Event(new_boarding_time, kind[7], event.entity)
-        # FEL.append(new_boarding_event)
-        count = count + 1
-
-        print("bye")
-        return count
+        new_boarding_time = random_routine(event, "totem")
+        new_boarding_event = Event(new_boarding_time, kind[7], event.entity)
+        FEL.append(new_boarding_event)
+        return
     else:
         # If queue is empty change server state to free
         security[event.entity.server] = "free"
-        count = count + 1
-        print("bye")
+
         # Schedule arrive boarding event
-        # new_boarding_time = random_routine(event, "totem")
-        # new_boarding_event = Event(new_boarding_time, kind[7], event.entity)
-        # FEL.append(new_boarding_event)
-        return count
+        new_boarding_time = random_routine(event, "totem")
+        new_boarding_event = Event(new_boarding_time, kind[7], event.entity)
+        FEL.append(new_boarding_event)
+        return

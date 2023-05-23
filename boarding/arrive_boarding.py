@@ -3,7 +3,7 @@ from objects.event import Event
 from random_routine import random_routine
 
 
-def arrive_boarding(FEL, event, boarding_queue):
+def arrive_boarding(FEL, event):
     global board_gates
 
     status = event.entity.plane.status
@@ -12,10 +12,10 @@ def arrive_boarding(FEL, event, boarding_queue):
     for server, gate in enumerate(board_gates):
         if gate == event.entity.plane.id:
             if status == "arriving":
-                boarding_queue[server].append(event.entity)
+                gates_queues[server].append(event.entity)
             if status == "boarding":
-                if len(boarding_queue[server]) > 0:
-                    queue_passenger = boarding_queue[server][0]
+                if len(gates_queues[server]) > 0:
+                    queue_passenger = gates_queues[server][0]
                     new_serve_clock = queue_passenger.time + event.entity.time
                     queue_passenger.server = event.entity.server
                     new_serve_event = Event(new_serve_clock, kind[5], queue_passenger)
