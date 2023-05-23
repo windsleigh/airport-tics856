@@ -21,6 +21,8 @@ def arrive_checkin(FEL, event, counter_queue, totem_queue):
     next_clock = random_routine(event, "clock")
     # print("next clock:", next_clock)
     next_checkin_type = random_routine(event, "checkin")
+    # print("next checkin:", next_checkin_type)
+
     next_passenger = Passenger(
         event.entity.id + 1, "get_plane()", next_checkin_type, None, 0
     )
@@ -44,7 +46,7 @@ def arrive_checkin(FEL, event, counter_queue, totem_queue):
 
                 # Schedule next serve event
 
-                next_totem_event = Event(event.clock + 1, kind[2], event.entity)
+                next_totem_event = Event(event.clock, kind[2], event.entity)
                 FEL.append(next_totem_event)
                 return
         # If no totem is free add it to the counter queue
@@ -59,7 +61,7 @@ def arrive_checkin(FEL, event, counter_queue, totem_queue):
                 event.entity.server = server
 
                 # Schedule next serve event
-                next_counter_event = Event(event.clock + 1, kind[2], event.entity)
+                next_counter_event = Event(event.clock, kind[2], event.entity)
                 FEL.append(next_counter_event)
                 return
         # If no counter is free add it to the counter queue

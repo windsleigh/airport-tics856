@@ -33,30 +33,35 @@ def main():
 
     # FEL.append(planeEvent)
     FEL.append(passengerEvent)
-
+    clock = 0
+    count = 0
     for t in range(runtime):
-        clock = 0
-        event = time_routine(FEL, clock)
-        print("main clock:", event.clock)
+        # evil sorting
+        event, clock = time_routine(FEL, clock)
+        print("main clock:", clock)
+        print("event kind:", event.kind)
+        print("entity:", event.entity.id)
         match event.kind:
             case "ArriveCheckIn":
-                print("ArriveCheckIn")
+                print(
+                    "ArriveCheckIn ------------------------------------------------------"
+                )
                 arrive_checkin(FEL, event, counter_queue, totem_queue)
             case "ServeCheckIn":
-                print("ServeCheckIn")
-                serve_checkin(FEL, event)
+                # print("ServeCheckIn")
+                serve_checkin(FEL, event, clock)
             case "ExitCheckIn":
-                print("ExitCheckIn")
+                # print("ExitCheckIn")
                 exit_checkin(FEL, event, counter_queue, totem_queue)
             case "ArriveSecurity":
-                print("ArriveSecurity")
+                # print("ArriveSecurity")
                 arrive_security(FEL, event, security_queue)
             case "ServeSecurity":
-                print("ServeSecurity")
+                # print("ServeSecurity")
                 serve_security(FEL, event)
             case "ExitSecurity":
-                print("ExitSecurity")
-                exit_security(FEL, event, security_queue)
+                # print("ExitSecurity")
+                count = exit_security(FEL, event, security_queue, count)
             # case "ArriveBoarding":
             #     pass
             # case "ServeBoarding":
@@ -72,6 +77,8 @@ def main():
             case "ExitPlane":
                 print("ExitPlane")
                 exit_plane(FEL, event, boarding_queue)
+        print("count:", count)
+        FEL.sort(key=lambda x: x.clock, reverse=True)
     print("-----End-----")
 
 

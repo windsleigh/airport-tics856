@@ -16,7 +16,7 @@ def exit_checkin(FEL, event, counter_queue, totem_queue):
 
             # Gets the time spent on the queue adding the time the
             # person infront spent on the check in queue
-            new_serve_clock = queue_passenger.time + event.entity.time
+            # new_serve_clock = queue_passenger.time + event.entity.time
 
             # Assign the same server that is free now
             queue_passenger.server = event.entity.server
@@ -48,7 +48,8 @@ def exit_checkin(FEL, event, counter_queue, totem_queue):
 
             # Gets the time spent on the queue adding the time the
             # person infront spent on the check in queue
-            new_serve_clock = queue_passenger.time + event.entity.time
+            new_serve_clock = random_routine(event, "counter")
+            # queue_passenger.time + event.entity.time
             # Arrival + the time the person in front took to get checked in
 
             # Assign the same server that is free now
