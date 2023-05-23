@@ -8,9 +8,9 @@ class Plane:
         self.seats = seats
         Plane.__total_planes.append(self)
 
-    @property
-    def get_total_planes():
-        return Plane.__total_planes
+    # @property
+    # def get_total_planes():
+    #     return Plane.__total_planes
 
     def add_passenger(self):
         self.seats -= 1

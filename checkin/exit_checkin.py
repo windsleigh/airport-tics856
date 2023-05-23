@@ -1,6 +1,6 @@
-from event import Event
-from random_routine import random_routine
-from kinds import kind
+from objects.event import Event
+from methods.random_routine import random_routine
+from global_variables import *
 
 
 def exit_checkin(FEL, event, counter_queue, totem_queue):
@@ -8,9 +8,9 @@ def exit_checkin(FEL, event, counter_queue, totem_queue):
     global checkin_counters
 
     # Check chekin type queue
-    if event.checkin == "totem":
+    if event.entity.checkin == "totem":
         # Check if totem queue is empty
-        if totem_queue > 0:
+        if len(totem_queue) > 0:
             # Gets first event from the queue if its not empty
             queue_event = totem_queue[0]
 
@@ -40,9 +40,9 @@ def exit_checkin(FEL, event, counter_queue, totem_queue):
             FEL.append(new_security_event)
             return
 
-    if event.checkin == "counter":
+    if event.entity.checkin == "counter":
         # Check if counter queue is empty
-        if counter_queue > 0:
+        if len(counter_queue) > 0:
             # Gets first event from the queue if its not empty
             queue_event = totem_queue[0]
 

@@ -1,3 +1,27 @@
+# Runtime
+runtime = 100
+
+# Plane Capacity
+seats = 100
+
+# Gates
+gates = 5
+board_gates = [] * gates
+
+total_planes_queue = 5
+plane_queue = [False] * total_planes_queue
+
+# Check In
+counters = 5
+checkin_counters = ["free"] * counters
+totems = 5
+checkin_totems = ["free"] * totems
+
+# Security
+stations = 5
+security = ["free"] * stations
+
+
 # Dictionaries
 
 kind = {

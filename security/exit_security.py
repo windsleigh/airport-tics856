@@ -1,14 +1,13 @@
-from event import Event
-from main import security
-from kinds import kind
-from random_routine import random_routine
+from objects.event import Event
+from global_variables import *
+from methods.random_routine import random_routine
 
 
 def exit_security(FEL, event, security_queue):
     global security
 
     # Check if queue is empty
-    if security_queue > 0:
+    if len(security_queue) > 0:
         queue_event = security_queue[0]
 
         # Gets the time spent on the queue adding the time the

@@ -1,7 +1,6 @@
-from event import Event
-from main import security
-from random_routine import random_routine
-from kinds import kind
+from objects.event import Event
+from methods.random_routine import random_routine
+from global_variables import *
 
 
 def serve_security(FEL, event):
