@@ -9,8 +9,6 @@ def arrive_security(FEL, event, security_queue):
     event.entity.time = event.clock
 
     # Check for free security station
-    # print(event.entity.id)
-    # print(event.kind)
     for server, station in enumerate(security):
         if station == "free":
             # Set the station server to the passenger
@@ -18,9 +16,6 @@ def arrive_security(FEL, event, security_queue):
 
             # Schedule next serve security event
             new_serve_event = Event(event.clock, kind[5], event.entity)
-            # print(new_serve_event.entity.id)
-            # print(new_serve_event.kind)
-
             FEL.append(new_serve_event)
             return
     # Add to security queue if no station is empty

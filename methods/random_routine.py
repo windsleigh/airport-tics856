@@ -1,4 +1,6 @@
 import random
+
+# from get_plane import get_plane
 from global_variables import checkin
 
 
@@ -12,7 +14,7 @@ def random_routine(event, kind):
                 # next checkin type
                 return checkin[random.randint(1, 3)]
             if kind == "plane":
-                pass
+                return "get_plane()"
             if kind == "online":
                 # time it takes for the person to arrive at security from the entrance
                 return event.clock + 4
@@ -42,14 +44,14 @@ def random_routine(event, kind):
             return event.clock + 4
 
         case "ArriveBoarding":
-            pass
+            return event.clock + 4
         case "ServeBoarding":
-            pass
+            return event.clock + 4
         case "ExitBoarding":
-            pass
+            return event.clock + 4
         case "ArrivePlane":
-            pass
+            return event.clock + 4
         case "BoardPlane":
-            pass
+            return event.clock + 4
         case "ExitPlane":
-            pass
+            return event.clock + 4

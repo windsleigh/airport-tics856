@@ -4,12 +4,12 @@ from global_variables import *
 
 
 def serve_boarding(FEL, event):
-    global gates_counter
-    # gates_counter[event.entity.server] = "busy"
-    # entrance_time = event.entity.time
+    global gates_queues
+    # Change server to busy
+    gates_queues[event.entity.server] = "busy"
+
+    # Time spent in queue
     next_exit_clock = random_routine(event, "boarding")
-    # time_spent = next_exit_clock - entrance_time
-    # event.entity.time = time_spent
 
     # Schedule new exit event
     new_exit_event = Event(next_exit_clock, kind[9], event.entity)

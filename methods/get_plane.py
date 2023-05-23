@@ -6,8 +6,6 @@ from objects.plane import Plane
 def get_plane():
     global board_gates
     global plane_queue
-    # puertas : son los aviones que estan siendo abordados
-    # cola_aviones : son los aviones que se agendaron pero no habia espacio en las puertas
 
     planes_without_seats = []
 

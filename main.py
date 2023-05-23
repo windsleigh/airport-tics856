@@ -78,7 +78,6 @@ def main():
             case "ExitPlane":
                 print("ExitPlane")
                 exit_plane(FEL, event, boarding_queue)
-        print("count:", count)
         FEL.sort(key=lambda x: x.clock, reverse=True)
     print("-----End-----")
 

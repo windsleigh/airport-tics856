@@ -19,13 +19,9 @@ def arrive_checkin(FEL, event, counter_queue, totem_queue):
 
     # Next airport arrival event
     next_clock = random_routine(event, "clock")
-    # print("next clock:", next_clock)
     next_checkin_type = random_routine(event, "checkin")
-    # print("next checkin:", next_checkin_type)
 
-    next_passenger = Passenger(
-        event.entity.id + 1, "get_plane()", next_checkin_type, None, 0
-    )
+    next_passenger = Passenger(event.entity.id + 1, "plane", next_checkin_type, None, 0)
     next_arrive_event = Event(next_clock, kind[1], next_passenger)
     FEL.append(next_arrive_event)
 
@@ -45,7 +41,6 @@ def arrive_checkin(FEL, event, counter_queue, totem_queue):
                 event.entity.server = server
 
                 # Schedule next serve event
-
                 next_totem_event = Event(event.clock, kind[2], event.entity)
                 FEL.append(next_totem_event)
                 return
