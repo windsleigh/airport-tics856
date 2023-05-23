@@ -48,7 +48,7 @@ def arrive_checkin(FEL, event, counter_queue, totem_queue):
                 FEL.append(next_totem_event)
                 return
         # If no totem is free add it to the counter queue
-        totem_queue.append(event)
+        totem_queue.append(event.entity)
         return
 
     elif event.entity.checkin == "counter":
@@ -63,5 +63,5 @@ def arrive_checkin(FEL, event, counter_queue, totem_queue):
                 FEL.append(next_counter_event)
                 return
         # If no counter is free add it to the counter queue
-        counter_queue.append(event)
+        counter_queue.append(event.entity)
         return

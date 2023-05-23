@@ -7,6 +7,9 @@ from global_variables import *
 from methods.time_routine import time_routine
 from checkin.serve_checkin import serve_checkin
 from checkin.arrive_checkin import arrive_checkin
+from plane.arrive_plane import arrive_plane
+from plane.board_plane import board_plane
+from plane.exit_plane import exit_plane
 from security.arrive_security import arrive_security
 from security.exit_security import exit_security
 from security.serve_security import serve_security
@@ -19,8 +22,8 @@ def main():
     FEL = []
     counter_queue = []
     totem_queue = []
-
     security_queue = []
+    boarding_queue = []
 
     # plane = Plane(1, "arriving", None, seats - 1)
     passenger = Passenger(1, "plane", "counter", None, 0)
@@ -60,12 +63,15 @@ def main():
             #     pass
             # case "ExitBoarding":
             #     pass
-            # case "ArrivePlane":
-            #     board_gates.append(event.entity)
-            # case "BoardPlane":
-            #     pass
-            # case "ExitPlane":
-            #     pass
+            case "ArrivePlane":
+                print("ArrivePlane")
+                arrive_plane(FEL, event, boarding_queue)
+            case "BoardPlane":
+                print("BoardPlane")
+                board_plane(FEL, event, boarding_queue)
+            case "ExitPlane":
+                print("ExitPlane")
+                exit_plane(FEL, event, boarding_queue)
     print("-----End-----")
 
 

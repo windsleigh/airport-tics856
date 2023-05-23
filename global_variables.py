@@ -8,6 +8,10 @@ seats = 100
 gates = 5
 board_gates = [] * gates
 
+# Evil array creation
+gates_queues = [[] for _ in range(gates)]
+gates_counter = [[] for _ in range(gates)]
+
 total_planes_queue = 5
 plane_queue = [False] * total_planes_queue
 
@@ -20,6 +24,8 @@ checkin_totems = ["free"] * totems
 # Security
 stations = 5
 security = ["free"] * stations
+
+# Boarding
 
 
 # Dictionaries

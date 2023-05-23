@@ -17,4 +17,4 @@ def arrive_security(FEL, event, security_queue):
             new_serve_event = Event(event.clock, kind[5], event.entity)
             FEL.append(new_serve_event)
     # Add to security queue if no station is empty
-    security_queue.append(event)
+    security_queue.append(event.entity)

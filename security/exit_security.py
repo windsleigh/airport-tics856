@@ -8,17 +8,17 @@ def exit_security(FEL, event, security_queue):
 
     # Check if queue is empty
     if len(security_queue) > 0:
-        queue_event = security_queue[0]
+        queue_passenger = security_queue[0]
 
         # Gets the time spent on the queue adding the time the
         # person infront spent on the check in queue
-        new_serve_clock = queue_event.clock + event.entity.time
+        new_serve_clock = queue_passenger.time + event.entity.time
 
         # Assign the same server that is free now
-        queue_event.entity.server = event.entity.server
+        queue_passenger.server = event.entity.server
 
         # Schedule serve checkin event
-        new_serve_event = Event(new_serve_clock, kind[5], queue_event.entity)
+        new_serve_event = Event(new_serve_clock, kind[5], queue_passenger)
         FEL.append(new_serve_event)
 
         # Schedule arrive boarding event
