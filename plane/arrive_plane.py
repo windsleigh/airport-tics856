@@ -1,21 +1,19 @@
+from methods.insert_fel import insert_fel
 from objects.event import Event
-from global_variables import *
-from methods.random_routine import random_routine
+from config import gates
 
 
 def arrive_plane(FEL, event):
-    global board_gates
-    global plane_queue
+    global gates
 
-    # Set arrival time
-    event.entity.time = event.clock
-    # Check for free plane station
-    for lane, value in enumerate(board_gates):
-        if value == "free":
-            # Set the station server to the passenger
-            event.entity.lane = lane
-            event.entity.status = "boarding"
-            # Schedule next serve plan event
-            new_board_event = Event(event.clock, kind[11], event.entity)
-            FEL.append(new_board_event)
-            return
+    try:
+        free_gate = gates.index(None)
+    except ValueError:
+        free_gate = None
+
+    if free_gate is not None:
+        gates[free_gate] = event.entity
+        event.entity.gate = free_gate
+        event.entity.status = "arriving"
+        new_boarding_event = Event(event.clock, "BoardPlane", event.entity)
+        insert_fel(FEL, new_boarding_event)

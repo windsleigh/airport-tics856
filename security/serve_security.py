@@ -1,6 +1,7 @@
-from objects.event import Event
+from methods.insert_fel import insert_fel
 from methods.random_routine import random_routine
-from global_variables import *
+from objects.event import Event
+from config import security
 
 
 def serve_security(FEL, event):
@@ -11,6 +12,6 @@ def serve_security(FEL, event):
     next_exit_clock = random_routine(event, "security")
 
     # Schedule new exit event
-    new_exit_event = Event(next_exit_clock, kind[6], event.entity)
-    FEL.append(new_exit_event)
+    new_exit_event = Event(next_exit_clock, "ExitSecurity", event.entity)
+    insert_fel(FEL, new_exit_event)
     return

@@ -1,6 +1,7 @@
-from objects.event import Event
+from config import checkin_counters, checkin_totems
+from methods.insert_fel import insert_fel
 from methods.random_routine import random_routine
-from global_variables import *
+from objects.event import Event
 
 
 def serve_checkin(FEL, event):
@@ -16,10 +17,10 @@ def serve_checkin(FEL, event):
         next_exit_clock = random_routine(event, "totem")
 
         # Schedule new exit event
-        new_exit_event = Event(next_exit_clock, kind[3], event.entity)
-        FEL.append(new_exit_event)
-
+        new_exit_event = Event(next_exit_clock, "ExitCheckIn", event.entity)
+        insert_fel(FEL, new_exit_event)
         return
+
     if event.entity.checkin == "counter":
         # Changes the free server to busy
         checkin_counters[event.entity.server] = "busy"
@@ -28,6 +29,6 @@ def serve_checkin(FEL, event):
         next_exit_clock = random_routine(event, "counter")
 
         # Schedule new exit event
-        new_exit_event = Event(next_exit_clock, kind[3], event.entity)
-        FEL.append(new_exit_event)
+        new_exit_event = Event(next_exit_clock, "ExitCheckIn", event.entity)
+        insert_fel(FEL, new_exit_event)
         return

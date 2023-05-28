@@ -1,12 +1,10 @@
-from objects.event import Event
-from global_variables import *
+from methods.insert_fel import insert_fel
 from methods.random_routine import random_routine
+from objects.event import Event
 
 
 def board_plane(FEL, event):
-    # New exit event
-    next_exit_clock = random_routine(event, "leaving")
-    event.entity.status = "leaving"
-    new_exit_event = Event(next_exit_clock, kind[12], event.entity)
-    FEL.append(new_exit_event)
-    return
+    new_exit_time = random_routine(event, "exit")
+    event.entity.status = "boarding"
+    new_exit_event = Event(new_exit_time, "ExitPlane", event.entity)
+    insert_fel(FEL, new_exit_event)

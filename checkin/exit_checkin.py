@@ -1,6 +1,7 @@
-from objects.event import Event
+from config import checkin_counters, checkin_totems
+from methods.insert_fel import insert_fel
 from methods.random_routine import random_routine
-from global_variables import *
+from objects.event import Event
 
 
 def exit_checkin(FEL, event, counter_queue, totem_queue):
@@ -10,24 +11,25 @@ def exit_checkin(FEL, event, counter_queue, totem_queue):
     # Check chekin type queue
     if event.entity.checkin == "totem":
         # Check if totem queue is empty
+        # print("aaaaaaaaaaa", totem_queue)
+
         if len(totem_queue) > 0:
             # Gets first event from the queue if its not empty
-            queue_passenger = totem_queue[0]
-
-            # Gets the time spent on the queue
-            new_serve_clock = random_routine(event, "totem")
+            queue_passenger = totem_queue.pop(0)
 
             # Assign the same server that is free now
             queue_passenger.server = event.entity.server
 
             # Schedule serve checkin event
-            new_serve_event = Event(new_serve_clock, kind[2], queue_passenger)
-            FEL.append(new_serve_event)
+            new_serve_event = Event(event.clock, "ServeCheckIn", queue_passenger)
+            insert_fel(FEL, new_serve_event)
 
             # Schedule arrive security event
             new_security_time = random_routine(event, "totem")
-            new_security_event = Event(new_security_time, kind[4], event.entity)
-            FEL.append(new_security_event)
+            new_security_event = Event(
+                new_security_time, "ArriveSecurity", event.entity
+            )
+            insert_fel(FEL, new_security_event)
             return
         else:
             # If queue is empty change server state to free
@@ -35,30 +37,31 @@ def exit_checkin(FEL, event, counter_queue, totem_queue):
 
             # Schedule new security event
             new_security_time = random_routine(event, "totem")
-            new_security_event = Event(new_security_time, kind[4], event.entity)
-            FEL.append(new_security_event)
+            new_security_event = Event(
+                new_security_time, "ArriveSecurity", event.entity
+            )
+            insert_fel(FEL, new_security_event)
             return
 
     if event.entity.checkin == "counter":
         # Check if counter queue is empty
         if len(counter_queue) > 0:
             # Gets first event from the queue if its not empty
-            queue_passenger = totem_queue[0]
-
-            # Gets the time spent on the queue
-            new_serve_clock = random_routine(event, "counter")
+            queue_passenger = totem_queue.pop(0)
 
             # Assign the same server that is free now
             queue_passenger.server = event.entity.server
 
             # Schedule serve checkin event
-            new_serve_event = Event(new_serve_clock, kind[2], queue_passenger)
-            FEL.append(new_serve_event)
+            new_serve_event = Event(event.clock, "ServeCheckIn", queue_passenger)
+            insert_fel(FEL, new_serve_event)
 
             # Schedule new security event
             new_security_time = random_routine(event, "counter")
-            new_security_event = Event(new_security_time, kind[4], event.entity)
-            FEL.append(new_security_event)
+            new_security_event = Event(
+                new_security_time, "ArriveSecurity", event.entity
+            )
+            insert_fel(FEL, new_security_event)
             return
         else:
             # If queue is empty change server state to free
@@ -66,6 +69,8 @@ def exit_checkin(FEL, event, counter_queue, totem_queue):
 
             # Schedule new security event
             new_security_time = random_routine(event, "counter")
-            new_security_event = Event(new_security_time, kind[4], event.entity)
-            FEL.append(new_security_event)
+            new_security_event = Event(
+                new_security_time, "ArriveSecurity", event.entity
+            )
+            insert_fel(FEL, new_security_event)
             return

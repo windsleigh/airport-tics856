@@ -1,19 +1,30 @@
 class Plane:
-    __total_planes = []
-
-    def __init__(self, id, status, lane, seats):
-        self.id = id  # ID PLANE
+    def __init__(self, id, status, tickets, seats, time, gate):
+        self.id = id
         self.status = status
-        self.lane = lane
+        self.tickets = tickets
         self.seats = seats
-        Plane.__total_planes.append(self)
+        self.time = time
+        self.gate = gate
+        self.queue = []
 
-    # @property
-    # def get_total_planes():
-    #     return Plane.__total_planes
+    def sell_ticket(self):
+        self.tickets -= 1
 
-    def add_passenger(self):
+    def board_plane(self):
         self.seats -= 1
 
-    def has_available_seats(self):
-        return self.seats > 0
+    def has_available_tickets(self):
+        return self.tickets > 0
+
+    def print_tickets(self):
+        print("tickets lefts:", self.tickets)
+
+    def queue_length(self):
+        return len(self.queue)
+
+    def add_passenger(self, passenger):
+        self.queue.append(passenger)
+
+    def get_passenger(self):
+        return self.queue.pop(0)
