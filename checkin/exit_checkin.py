@@ -11,7 +11,6 @@ def exit_checkin(FEL, event, counter_queue, totem_queue):
     # Check chekin type queue
     if event.entity.checkin == "totem":
         # Check if totem queue is empty
-        # print("aaaaaaaaaaa", totem_queue)
 
         if len(totem_queue) > 0:
             # Gets first event from the queue if its not empty
