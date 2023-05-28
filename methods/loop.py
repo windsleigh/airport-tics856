@@ -56,7 +56,6 @@ def loop():
     ]
 
     while runtime > 0:
-        # print(clock)
         event, clock = time_routine(FEL, clock)
         match event.kind:
             # Check In routines

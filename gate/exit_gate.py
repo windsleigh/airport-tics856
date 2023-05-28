@@ -4,7 +4,6 @@ from config import gate_counters
 
 
 def exit_gate(FEL, event):
-    print("exit_gate----------------------------")
     if event.entity.plane.queue_length() > 0:
         queue_passenger = event.entity.plane.get_passenger()
 
@@ -20,7 +19,6 @@ def exit_gate(FEL, event):
             print("plane full missed flight")
         else:
             event.entity.plane.board_plane()
-            print("yahooo----------------------------")
         return
     else:
         gate_counters[event.entity.server] = "free"
@@ -29,5 +27,4 @@ def exit_gate(FEL, event):
             print("plane full missed flight")
         else:
             event.entity.plane.board_plane()
-            print("yahooo----------------------------")
         return

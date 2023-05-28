@@ -5,7 +5,6 @@ from objects.event import Event
 
 
 def serve_gate(FEL, event):
-    print("serve gate----------------------------")
     global gate_counters
 
     gate_counters[event.entity.server] = "busy"
