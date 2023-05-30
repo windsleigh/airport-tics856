@@ -46,7 +46,7 @@ def exit_checkin(FEL, event, counter_queue, totem_queue):
         # Check if counter queue is empty
         if len(counter_queue) > 0:
             # Gets first event from the queue if its not empty
-            queue_passenger = totem_queue.pop(0)
+            queue_passenger = counter_queue.pop(0)
 
             # Assign the same server that is free now
             queue_passenger.server = event.entity.server
