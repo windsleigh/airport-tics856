@@ -2,12 +2,12 @@ from config import checkin_counters, checkin_totems
 from methods.insert_fel import insert_fel
 from methods.random_routine import random_routine
 from objects.event import Event
-
-
+from metrics.checkin import counter_checkin
+    
 def exit_checkin(FEL, event, counter_queue, totem_queue):
     global checkin_totems
     global checkin_counters
-
+    counter_checkin(event)
     # Check chekin type queue
     if event.entity.checkin == "totem":
         # Check if totem queue is empty

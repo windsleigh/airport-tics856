@@ -6,6 +6,7 @@ from objects.event import Event
 from config import checkin_counters, checkin_totems
 
 
+
 def arrive_checkin(FEL, event, counter_queue, totem_queue):
     global checkin_counters, checkin_totems
 

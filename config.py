@@ -23,3 +23,8 @@ checkin = {
     2: "totem",
     3: "online",
 }
+
+checkin_totem_list =[]
+checkin_counter_list = []
+
+security_list = []

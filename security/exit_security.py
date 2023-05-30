@@ -2,10 +2,12 @@ from methods.insert_fel import insert_fel
 from methods.random_routine import random_routine
 from objects.event import Event
 from config import security
+from metrics.security import counter_security
 
 
 def exit_security(FEL, event, security_queue):
     global security
+    counter_security(event)
 
     # Check if queue is empty
     if len(security_queue) > 0:
