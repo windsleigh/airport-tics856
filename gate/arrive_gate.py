@@ -9,6 +9,7 @@ def arrive_gate(FEL, event):
 
     # Time passenger arrives at gate
     event.entity.time = event.clock
+
     print("plane status: ", gates[event.entity.plane.gate].status)
     if gates[event.entity.plane.gate].status == "arriving":
         event.entity.plane.add_passenger(event.entity)

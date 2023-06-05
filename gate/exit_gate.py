@@ -1,9 +1,11 @@
 from methods.insert_fel import insert_fel
+from metrics.gate import counter_gate
 from objects.event import Event
 from config import gate_counters
 
 
 def exit_gate(FEL, event):
+    counter_gate(event)
     if event.entity.plane.queue_length() > 0:
         queue_passenger = event.entity.plane.get_passenger()
 

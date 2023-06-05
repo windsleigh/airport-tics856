@@ -1,6 +1,8 @@
 runtime = 1000000
 tickets = 100
 seats = 100
+
+
 # Check In
 counters = 5
 checkin_counters = ["free"] * counters
@@ -24,7 +26,9 @@ checkin = {
     3: "online",
 }
 
-checkin_totem_list =[]
+checkin_totem_list = []
 checkin_counter_list = []
 
 security_list = []
+
+gate_list = []
