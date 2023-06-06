@@ -12,13 +12,13 @@ def arrive_checkin(FEL, event, counter_queue, totem_queue):
 
     # Checkin arrival time
     event.entity.time = event.clock
-
+    event.entity.arrival_time = event.clock
     # Next airport arrival
     new_arrival_plane = random_plane()
     new_arrival_clock = random_routine(event, "clock")
     new_arrival_checkin = random_routine(event, "checkin")
     new_arrival_passenger = Passenger(
-        event.entity.id + 1, new_arrival_plane, new_arrival_checkin, None, None
+        event.entity.id + 1, new_arrival_plane, new_arrival_checkin, None, None, None
     )
 
     # Schedule next arrival

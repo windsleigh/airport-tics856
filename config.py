@@ -32,3 +32,5 @@ checkin_counter_list = []
 security_list = []
 
 gate_list = []
+
+total_airport_time =[]
