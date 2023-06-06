@@ -8,14 +8,15 @@ from methods.time_routine import time_routine
 from objects.passenger import Passenger
 from objects.plane import Plane
 from objects.event import Event
-from config import runtime, tickets, seats
+from config import total_passengers_in
+from config import runtime, tickets, seats, checkin_totem_list, security_list, checkin_counter_list, gate_list, total_airport_time
 from plane.arrive_plane import arrive_plane
 from plane.board_plane import board_plane
 from plane.exit_plane import exit_plane
 from security.arrive_security import arrive_security
 from security.exit_security import exit_security
 from security.serve_security import serve_security
-
+import numpy
 
 def loop():
     # Constants
@@ -34,7 +35,7 @@ def loop():
     plane4 = Plane(4, "arriving", tickets, seats, None, None)
     plane5 = Plane(5, "arriving", tickets, seats, None, None)
 
-    passenger = Passenger(1, plane1, "counter", None, None)
+    passenger = Passenger(1, plane1, "counter", None, None, None)
 
     # Events
     plane_event1 = Event(1, "ArrivePlane", plane1)
@@ -90,3 +91,10 @@ def loop():
             case "ExitPlane":
                 exit_plane(FEL, event)
         runtime -= 1
+
+    print("Tiempo en check-in counter", numpy.mean(checkin_counter_list))
+    print("Tiempo en check-in totem", numpy.mean(checkin_totem_list))
+    print("Tiempo en seguridad",numpy.mean(security_list))
+    print("Tiempo en puerta",numpy.mean(gate_list))
+    print("Tiempo en aeropuerto",numpy.mean(total_airport_time))
+    print("Personas que pierden el avion", numpy.mean(total_passengers_in))
