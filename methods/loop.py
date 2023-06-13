@@ -16,7 +16,19 @@ from plane.exit_plane import exit_plane
 from security.arrive_security import arrive_security
 from security.exit_security import exit_security
 from security.serve_security import serve_security
-import numpy
+import numpy as np
+
+def print_metrics(counter_queue, totem_queue, security_queue, gate_list, total_airport_time, total_passengers_in):
+    print("--- Métricas ---")
+    print("Eventos:")
+    print("Tiempo en check-in counter:", np.mean(checkin_counter_list))
+    print("Tiempo en check-in totem:", np.mean(checkin_totem_list))
+    print("Tiempo en seguridad:", np.mean(security_list))
+    print("Tiempo en puerta:", np.mean(gate_list))
+    print("Tiempo en aeropuerto:", np.mean(total_airport_time))
+    print("Personas que pierden el avión:", np.mean(total_passengers_in))
+    print("----------------")
+
 
 def loop():
     # Constants
@@ -90,11 +102,8 @@ def loop():
                 board_plane(FEL, event)
             case "ExitPlane":
                 exit_plane(FEL, event)
-        runtime -= 1
+        print_metrics(counter_queue, totem_queue, security_queue, gate_list, total_airport_time, total_passengers_in)
 
-    print("Tiempo en check-in counter", numpy.mean(checkin_counter_list))
-    print("Tiempo en check-in totem", numpy.mean(checkin_totem_list))
-    print("Tiempo en seguridad",numpy.mean(security_list))
-    print("Tiempo en puerta",numpy.mean(gate_list))
-    print("Tiempo en aeropuerto",numpy.mean(total_airport_time))
-    print("Personas que pierden el avion", numpy.mean(total_passengers_in))
+        runtime -= 1
+    print("------ Final de la simulación ------")
+    print_metrics(counter_queue, totem_queue, security_queue, gate_list, total_airport_time, total_passengers_in)

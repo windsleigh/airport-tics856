@@ -33,14 +33,22 @@ def random_routine(event, kind):
         # Security
         case "ServeSecurity":
             # Time it takes for the person to pass through a security station
-            return event.clock + 0.1
+            return event.clock + np.random.uniform(2,3)
         case "ExitSecurity":
             # time it takes for the person to arrive at barding gate from security
-            return event.clock + 0.08
+            k = 0
+            mean = 0.5
+
+            # Cálculo del parámetro de escala basado en la media y el parámetro de forma
+            scale = mean / k if k > 0 else np.inf
+
+            # Generación de una muestra de la distribución Erlang utilizando la distribución gamma
+            return event.clock + np.random.gamma(shape=k, scale=scale)
+
 
         # Gate
         case "ServeGate":
             return event.clock + 0.04
         # Plane
         case "BoardPlane":
-            return event.clock + 2
+            return event.clock + np.random.poisson(lam=15)
