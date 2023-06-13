@@ -18,17 +18,28 @@ from security.exit_security import exit_security
 from security.serve_security import serve_security
 import numpy as np
 
-def print_metrics(counter_queue, totem_queue, security_queue, gate_list, total_airport_time, total_passengers_in):
-    print("--- Métricas ---")
-    print("Eventos:")
-    print("Tiempo en check-in counter:", np.mean(checkin_counter_list))
-    print("Tiempo en check-in totem:", np.mean(checkin_totem_list))
-    print("Tiempo en seguridad:", np.mean(security_list))
-    print("Tiempo en puerta:", np.mean(gate_list))
-    print("Tiempo en aeropuerto:", np.mean(total_airport_time))
-    print("Personas que pierden el avión:", np.mean(total_passengers_in))
-    print("----------------")
-
+def print_metrics(counter_queue, totem_queue, security_queue, gate_list, total_airport_time, total_passengers_in, inloop):
+    if inloop==True:
+        print("--- Métricas ---")
+        print("Eventos:")
+        print("Tiempo en check-in counter:", np.mean(checkin_counter_list))
+        print("Personas en cola de counter:", len(counter_queue))
+        print("Personas en cola de totem:", len(totem_queue))
+        print("Tiempo en check-in totem:", np.mean(checkin_totem_list))
+        print("Tiempo en seguridad:", np.mean(security_list))
+        print("Personas en cola de seguridad:", len(security_queue))
+        print("Tiempo en puerta:", np.mean(gate_list))
+        print("----------------")
+    else:
+        print("--- Métricas ---")
+        print("Eventos:")
+        print("Tiempo promedio en check-in counter:", np.mean(checkin_counter_list))
+        print("Tiempo promedio en check-in totem:", np.mean(checkin_totem_list))
+        print("Tiempo promedio en seguridad:", np.mean(security_list))
+        print("Tiempo promedio en puerta:", np.mean(gate_list))
+        print("Tiempo promedio en aeropuerto:", np.mean(total_airport_time))
+        print("Personas que pierden el avión:", np.mean(total_passengers_in))
+        print("----------------")
 
 def loop():
     # Constants
@@ -102,8 +113,8 @@ def loop():
                 board_plane(FEL, event)
             case "ExitPlane":
                 exit_plane(FEL, event)
-        print_metrics(counter_queue, totem_queue, security_queue, gate_list, total_airport_time, total_passengers_in)
+        print_metrics(counter_queue, totem_queue, security_queue, gate_list, total_airport_time, total_passengers_in, True)
 
         runtime -= 1
     print("------ Final de la simulación ------")
-    print_metrics(counter_queue, totem_queue, security_queue, gate_list, total_airport_time, total_passengers_in)
+    print_metrics(counter_queue, totem_queue, security_queue, gate_list, total_airport_time, total_passengers_in, False)
