@@ -2,6 +2,7 @@ import random
 from config import checkin
 import numpy as np
 
+
 def random_routine(event, kind):
     match event.kind:
         # Checkin
@@ -18,10 +19,10 @@ def random_routine(event, kind):
         case "ServeCheckIn":
             if kind == "totem":
                 # Time it takes for the person to pass through a totem
-                return event.clock + np.random.uniform(2,3)
+                return event.clock + np.random.uniform(2, 3)
             if kind == "counter":
                 # Time it takes for the person to pass through a counter
-                return event.clock + np.random.uniform(2,3)
+                return event.clock + np.random.uniform(2, 3)
         case "ExitCheckIn":
             if kind == "totem":
                 # time it takes for the person to arrive at security from totem
@@ -33,7 +34,7 @@ def random_routine(event, kind):
         # Security
         case "ServeSecurity":
             # Time it takes for the person to pass through a security station
-            return event.clock + np.random.uniform(2,3)
+            return event.clock + np.random.uniform(2, 3)
         case "ExitSecurity":
             # time it takes for the person to arrive at barding gate from security
             k = 0
@@ -45,10 +46,9 @@ def random_routine(event, kind):
             # Generación de una muestra de la distribución Erlang utilizando la distribución gamma
             return event.clock + np.random.gamma(shape=k, scale=scale)
 
-
         # Gate
         case "ServeGate":
             return event.clock + 0.04
         # Plane
         case "BoardPlane":
-            return event.clock + np.random.poisson(lam=15)
+            return event.clock + 0.45
