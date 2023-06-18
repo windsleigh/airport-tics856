@@ -9,7 +9,12 @@ def exit_plane(FEL, event):
     global gates, plane_history
     event.entity.status = "exiting"
 
-    plane_history.append(event.entity)
+    plane_history[event.entity.id] = {
+        "status": "exited",
+        "exit_time": event.clock,
+        "gate": event.entity.gate,
+        # add more information about the plane here if needed
+    }
 
     new_plane = Plane(event.entity.id + len(gates), None, tickets, 0, None, None)
     new_exit_event = Event(event.clock, "ArrivePlane", new_plane)

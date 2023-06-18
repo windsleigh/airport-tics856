@@ -8,17 +8,24 @@ from config import checkin_counters, checkin_totems, counter_queue, totem_queue
 
 def arrive_checkin(FEL, event):
     global checkin_counters, checkin_totems, counter_queue, totem_queue
-    # print("Arrive checkin event")
+
     # Checkin arrival time
     event.entity.time = event.clock
     event.entity.arrival_time = event.clock
 
     # Next airport arrival
+    new_gender = random_routine(event, "gender")
     new_arrival_plane = random_plane()  # Random plane
     new_arrival_clock = random_routine(event, "clock")  # Random clock
     new_arrival_checkin = random_routine(event, "checkin")  # Random checkin
     new_arrival_passenger = Passenger(
-        event.entity.id + 1, new_arrival_plane, new_arrival_checkin, None, None, None
+        event.entity.id + 1,
+        new_arrival_plane,
+        new_arrival_checkin,
+        None,
+        None,
+        None,
+        new_gender,
     )  # New passenger
 
     # Schedule next arrival

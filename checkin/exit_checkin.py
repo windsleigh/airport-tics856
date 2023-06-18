@@ -7,7 +7,6 @@ from metrics.checkin import counter_checkin
 
 def exit_checkin(FEL, event):
     global checkin_totems, checkin_counters, counter_queue, totem_queue
-    # print("Exit checkin event")
     counter_checkin(event)
 
     # Check chekin type queue
@@ -30,7 +29,7 @@ def exit_checkin(FEL, event):
             new_security_event = Event(
                 new_security_time, "ArriveSecurity", event.entity
             )
-            print("new security event", new_security_event)
+
             insert_fel(FEL, new_security_event)
             return
         else:

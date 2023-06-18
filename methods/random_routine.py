@@ -1,56 +1,60 @@
 import random
-from config import checkin
 import numpy as np
-
-
-# its in minutes
 
 
 def random_routine(event, kind):
     match event.kind:
         # Checkin
         case "ArriveCheckIn":
+            if kind == "gender":
+                return random.randint(0, 1)
             if kind == "clock":
-                # time it takes for a new person to arrive to the airport
-                return event.clock + np.random.gamma(5, 20, size=None)
+                if event.entity.gender == 0:  # male
+                    return event.clock + np.random.gamma(1, 3, size=None)
+                elif event.entity.gender == 1:  # female
+                    return event.clock + np.random.gamma(1, 3, size=None)
             if kind == "checkin":
-                # next checkin type
-                return checkin[random.randint(1, 3)]  # fix
+                checkin_types = ["counter", "totem", "online"]
+                probabilities = [0.05, 0.30, 0.65]
+                return np.random.choice(checkin_types, p=probabilities)
             if kind == "online":
-                # time it takes for the person to arrive at security from the entrance
-                return event.clock + 10
+                return event.clock + np.random.uniform(3, 4)
 
         case "ServeCheckIn":
             if kind == "totem":
-                # Time it takes for the person to pass through a totem
-                return event.clock + np.random.uniform(5, 10)
+                return event.clock + 60  # constant 60s
             if kind == "counter":
-                # Time it takes for the person to pass through a counter
-                return event.clock + np.random.uniform(10, 20)
+                # Log-normal distribution
+                return event.clock + np.random.lognormal(
+                    mean=4.18, sigma=np.sqrt(0.364)
+                )
 
         case "ExitCheckIn":
             if kind == "totem":
-                # time it takes for the person to arrive at security from totem
-                return event.clock + 10
+                return event.clock + np.random.uniform(2, 5)
             if kind == "counter":
-                # time it takes for the person to arrive at security from counter
-                return event.clock + 15
+                return event.clock + np.random.uniform(2, 5)
 
         # Security
         case "ServeSecurity":
-            # Time it takes for the person to pass through a security station
-            return event.clock + np.random.uniform(5, 15)
+            if event.entity.gender == 0:  # male
+                # Weibull distribution for males
+                return event.clock + np.random.weibull(3.478) * np.sqrt(30.069)
+            elif event.entity.gender == 1:  # female
+                # Log-normal distribution for females
+                return event.clock + np.random.lognormal(
+                    mean=3.093, sigma=np.sqrt(30.069)
+                )
 
         case "ExitSecurity":
-            # time it takes for the person to arrive at boarding gate from security
-            k = 5
-            mean = 10
-            scale = mean / k if k > 0 else np.inf
-            return event.clock + np.random.gamma(shape=k, scale=scale)
+            return event.clock + np.random.uniform(2, 5)
 
         # Gate
         case "ServeGate":
-            return event.clock + 15
+            # Weibull distribution
+            return event.clock + np.random.weibull(2.4) * np.sqrt(18.385)
+
         # Plane
         case "BoardPlane":
-            return event.clock + 30
+            # Poisson distribution (15 min * 60s)
+            return event.clock + 500  # np.random.poisson(lam=15 * 60)
