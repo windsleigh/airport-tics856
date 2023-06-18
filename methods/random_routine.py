@@ -9,10 +9,8 @@ def random_routine(event, kind):
             if kind == "gender":
                 return random.randint(0, 1)
             if kind == "clock":
-                if event.entity.gender == 0:  # male
-                    return event.clock + np.random.gamma(1, 3, size=None)
-                elif event.entity.gender == 1:  # female
-                    return event.clock + np.random.gamma(1, 3, size=None)
+                return event.clock + 2.01
+
             if kind == "checkin":
                 checkin_types = ["counter", "totem", "online"]
                 probabilities = [0.05, 0.30, 0.65]
@@ -57,4 +55,4 @@ def random_routine(event, kind):
         # Plane
         case "BoardPlane":
             # Poisson distribution (15 min * 60s)
-            return event.clock + 500  # np.random.poisson(lam=15 * 60)
+            return event.clock + 45  # np.random.poisson(lam=15 * 60)

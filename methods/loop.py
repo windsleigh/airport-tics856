@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
+
 from objects.passenger import Passenger
 from objects.plane import Plane
 from objects.event import Event
@@ -191,4 +193,19 @@ def loop():
         print(row)
     print(separator)
 
+    # Plotting the time values
+    plt.plot(time_in_totems, label="Time in Totems")
+    plt.plot(time_in_counters, label="Time in Counters")
+    plt.plot(time_in_security, label="Time in Security")
+    plt.plot(time_in_gate, label="Time in Gate")
+    plt.plot(time_in_airport, label="Time in Airport")
+
+    # Adding labels and title
+    plt.xlabel("Iterations")
+    plt.ylabel("Time")
+    plt.title("Time Spent in Different Sections of the Airport")
+    plt.legend()
+
+    # Display the plot
+    plt.show()
     return
