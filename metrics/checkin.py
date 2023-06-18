@@ -1,14 +1,19 @@
-from config import checkin_counter_list, checkin_totem_list
+from config import time_in_totems, time_in_counters
+
 
 def counter_checkin(event):
-    global checkin_totem_list, checkin_counter_list
-    if event.entity.checkin == 'totem':
-        init_time = event.entity.time 
+    global time_in_totems, time_in_counters
+
+    if event.entity.checkin == "totem":
+        init_time = event.entity.time
         exit_time = event.clock
-        total_time = exit_time - init_time  
-        checkin_totem_list.append(total_time)
-    elif event.entity.checkin == 'counter':
-        init_time = event.entity.time 
+        total_time = exit_time - init_time
+        time_in_totems.append(total_time)
+        return
+
+    elif event.entity.checkin == "counter":
+        init_time = event.entity.time
         exit_time = event.clock
-        total_time = exit_time - init_time  
-        checkin_counter_list.append(total_time)
+        total_time = exit_time - init_time
+        time_in_counters.append(total_time)
+        return

@@ -7,7 +7,7 @@ from objects.event import Event
 def serve_checkin(FEL, event):
     global checkin_totems
     global checkin_counters
-
+    # print("Serve checkin event")
     # Check for chekin type
     if event.entity.checkin == "totem":
         # Changes the free server to busy

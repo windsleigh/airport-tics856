@@ -1,13 +1,15 @@
-from config import checkin_counters, checkin_totems
+from config import checkin_counters, checkin_totems, counter_queue, totem_queue
 from methods.insert_fel import insert_fel
 from methods.random_routine import random_routine
 from objects.event import Event
 from metrics.checkin import counter_checkin
-    
-def exit_checkin(FEL, event, counter_queue, totem_queue):
-    global checkin_totems
-    global checkin_counters
+
+
+def exit_checkin(FEL, event):
+    global checkin_totems, checkin_counters, counter_queue, totem_queue
+    # print("Exit checkin event")
     counter_checkin(event)
+
     # Check chekin type queue
     if event.entity.checkin == "totem":
         # Check if totem queue is empty
@@ -28,6 +30,7 @@ def exit_checkin(FEL, event, counter_queue, totem_queue):
             new_security_event = Event(
                 new_security_time, "ArriveSecurity", event.entity
             )
+            print("new security event", new_security_event)
             insert_fel(FEL, new_security_event)
             return
         else:

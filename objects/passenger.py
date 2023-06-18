@@ -5,4 +5,4 @@ class Passenger:
         self.checkin = checkin
         self.server = server
         self.time = time
-        self.arrival_time = arrival_time    
+        self.arrival_time = arrival_time

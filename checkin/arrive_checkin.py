@@ -3,29 +3,31 @@ from methods.random_plane import random_plane
 from methods.random_routine import random_routine
 from objects.passenger import Passenger
 from objects.event import Event
-from config import checkin_counters, checkin_totems
+from config import checkin_counters, checkin_totems, counter_queue, totem_queue
 
 
-
-def arrive_checkin(FEL, event, counter_queue, totem_queue):
-    global checkin_counters, checkin_totems
-
+def arrive_checkin(FEL, event):
+    global checkin_counters, checkin_totems, counter_queue, totem_queue
+    # print("Arrive checkin event")
     # Checkin arrival time
     event.entity.time = event.clock
     event.entity.arrival_time = event.clock
+
     # Next airport arrival
-    new_arrival_plane = random_plane()
-    new_arrival_clock = random_routine(event, "clock")
-    new_arrival_checkin = random_routine(event, "checkin")
+    new_arrival_plane = random_plane()  # Random plane
+    new_arrival_clock = random_routine(event, "clock")  # Random clock
+    new_arrival_checkin = random_routine(event, "checkin")  # Random checkin
     new_arrival_passenger = Passenger(
         event.entity.id + 1, new_arrival_plane, new_arrival_checkin, None, None, None
-    )
+    )  # New passenger
 
     # Schedule next arrival
-    new_arrival_event = Event(new_arrival_clock, "ArriveCheckIn", new_arrival_passenger)
+    new_arrival_event = Event(
+        new_arrival_clock, "ArriveCheckIn", new_arrival_passenger
+    )  # New event
 
     # Insert event in FEL
-    insert_fel(FEL, new_arrival_event)
+    insert_fel(FEL, new_arrival_event)  # Insert event
 
     # Check checkin type
     if event.entity.checkin == "online":

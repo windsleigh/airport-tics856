@@ -1,11 +1,12 @@
-from config import security
+from config import security, security_queue
 from methods.insert_fel import insert_fel
-from methods.random_routine import random_routine
 from objects.event import Event
 
 
-def arrive_security(FEL, event, security_queue):
-    global security
+def arrive_security(FEL, event):
+    global security, security_queue
+    # print("Arrive security event")
+
     # Set arrival time
     event.entity.time = event.clock
 
@@ -21,3 +22,4 @@ def arrive_security(FEL, event, security_queue):
             return
     # Add to security queue if no station is empty
     security_queue.append(event.entity)
+    return

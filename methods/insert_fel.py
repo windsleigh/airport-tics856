@@ -4,3 +4,4 @@ def insert_fel(FEL, event):
             FEL.insert(i, event)
             return
     FEL.append(event)
+    return

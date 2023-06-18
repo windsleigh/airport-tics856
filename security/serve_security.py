@@ -6,6 +6,7 @@ from config import security
 
 def serve_security(FEL, event):
     global security
+    # print("Serve security event")
     security[event.entity.server] = "busy"
 
     # Time spent on queue

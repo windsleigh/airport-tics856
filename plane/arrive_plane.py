@@ -15,5 +15,6 @@ def arrive_plane(FEL, event):
         gates[free_gate] = event.entity
         event.entity.gate = free_gate
         event.entity.status = "arriving"
-        new_boarding_event = Event(event.clock, "BoardPlane", event.entity)
+        new_boarding_event = Event(event.clock + 15, "BoardPlane", event.entity)
         insert_fel(FEL, new_boarding_event)
+        return

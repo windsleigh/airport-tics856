@@ -1,14 +1,14 @@
 from methods.insert_fel import insert_fel
 from methods.random_routine import random_routine
 from objects.event import Event
-from config import security
+from config import security, security_queue
 from metrics.security import counter_security
 
 
-def exit_security(FEL, event, security_queue):
-    global security
+def exit_security(FEL, event):
+    global security, security_queue
     counter_security(event)
-
+    # print("Exit security event")
     # Check if queue is empty
     if len(security_queue) > 0:
         # Get first passenger from queue

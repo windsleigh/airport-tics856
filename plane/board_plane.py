@@ -8,3 +8,5 @@ def board_plane(FEL, event):
     event.entity.status = "boarding"
     new_exit_event = Event(new_exit_time, "ExitPlane", event.entity)
     insert_fel(FEL, new_exit_event)
+
+    return
