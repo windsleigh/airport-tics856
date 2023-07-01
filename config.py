@@ -1,4 +1,4 @@
-runtime = 1000
+runtime = 5000
 tickets = 100
 seats = 100
 
@@ -7,13 +7,13 @@ totem_queue = []
 security_queue = []
 
 # Check In
-counters = 10
+counters = 5
 checkin_counters = ["free"] * counters
 totems = 10
 checkin_totems = ["free"] * totems
 
 # Security
-stations = 15
+stations = 35
 security = ["free"] * stations
 
 # Plane
@@ -23,11 +23,12 @@ gates = [None] * max_planes
 gate_counters = ["free"] * max_planes
 
 
-time_in_totems = []
-time_in_counters = []
-time_in_security = []
-time_in_gate = []
-time_in_airport = []
+time_in_totems = {}
+time_in_counters = {}
+time_in_security = {}
+time_in_gate = {}
+time_in_airport = {}
+
 
 plane_history = {}
 

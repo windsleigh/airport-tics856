@@ -160,21 +160,21 @@ def loop():
                 exit_plane(FEL, event)
         plane_id_info = ""
 
-        if hasattr(event.entity, "plane") and event.entity.plane:
-            plane_id_info = f" | Plane ID: {event.entity.plane.id}"
+        # if hasattr(event.entity, "plane") and event.entity.plane:
+        #     plane_id_info = f" | Plane ID: {event.entity.plane.id}"
 
-        print(
-            f"Clock: {clock:.2f} | Entity ID: {event.entity.id}{plane_id_info} | Queue Lengths | Totem Queue: {len(totem_queue)} | Counter Queue: {len(counter_queue)} | Security Queue: {len(security_queue)}"
-        )
-        print(separator)
+        # print(
+        #     f"Clock: {clock:.2f} | Entity ID: {event.entity.id}{plane_id_info} | Queue Lengths | Totem Queue: {len(totem_queue)} | Counter Queue: {len(counter_queue)} | Security Queue: {len(security_queue)}"
+        # )
+        # print(separator)
         runtime -= 1
 
     # Assuming you already have the values calculated
-    average_time_in_airport = np.mean(time_in_airport)
-    average_time_in_counters = np.mean(time_in_counters)
-    average_time_in_totems = np.mean(time_in_totems)
-    average_time_in_security = np.mean(time_in_security)
-    average_time_in_gate = np.mean(time_in_gate)
+    average_time_in_airport = np.mean(list(time_in_airport.values()))
+    average_time_in_counters = np.mean(list(time_in_counters.values()))
+    average_time_in_totems = np.mean(list(time_in_totems.values()))
+    average_time_in_security = np.mean(list(time_in_security.values()))
+    average_time_in_gate = np.mean(list(time_in_gate.values()))
 
     # Define rows
     rows = [
@@ -193,19 +193,37 @@ def loop():
         print(row)
     print(separator)
 
-    # Plotting the time values
-    plt.plot(time_in_totems, label="Time in Totems")
-    plt.plot(time_in_counters, label="Time in Counters")
-    plt.plot(time_in_security, label="Time in Security")
-    plt.plot(time_in_gate, label="Time in Gate")
-    plt.plot(time_in_airport, label="Time in Airport")
+    plt.plot(
+        list(time_in_totems.keys()),
+        list(time_in_totems.values()),
+        label="Time in Totems",
+    )
+    plt.plot(
+        list(time_in_counters.keys()),
+        list(time_in_counters.values()),
+        label="Time in Counters",
+    )
+    plt.plot(
+        list(time_in_security.keys()),
+        list(time_in_security.values()),
+        label="Time in Security",
+    )
+    plt.plot(
+        list(time_in_gate.keys()), list(time_in_gate.values()), label="Time in Gate"
+    )
+    plt.plot(
+        list(time_in_airport.keys()),
+        list(time_in_airport.values()),
+        label="Time in Airport",
+    )
 
     # Adding labels and title
-    plt.xlabel("Iterations")
+    plt.xlabel("Clock Time")
     plt.ylabel("Time")
     plt.title("Time Spent in Different Sections of the Airport")
     plt.legend()
 
     # Display the plot
     plt.show()
+
     return

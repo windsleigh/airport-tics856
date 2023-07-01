@@ -9,7 +9,7 @@ def random_routine(event, kind):
             if kind == "gender":
                 return random.randint(0, 1)
             if kind == "clock":
-                return event.clock + 2.01
+                return event.clock + 7.01
 
             if kind == "checkin":
                 checkin_types = ["counter", "totem", "online"]
